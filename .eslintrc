@@ -1,0 +1,8 @@
+{
+  "extends": "conaclos/ts-base",
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 0,
+    "no-confusing-arrow": 0,
+    "no-extra-semi": 0
+  }
+}

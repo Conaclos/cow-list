@@ -49,7 +49,7 @@ export class SortedCowList {
     inserted(value: u32): SortedCowList {
         const repr = this.repr
         // Logarithmically search the index of insertion in the list
-        const it = repr.atEqual(int3wayComparision(value))
+        const it = repr.atEqual(int3wayComparision(value), false)
         // Apply operations and return a new rope
         return new SortedCowList(repr.inserted(it.index, value))
     }

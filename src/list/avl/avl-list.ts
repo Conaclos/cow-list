@@ -94,8 +94,8 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
         return BinTreeIterator.atFirst(this.root)
     }
 
-    atEqual(f: Pathfinder<V>): BinTreeIterator<V> {
-        return BinTreeIterator.atEqual(this.root, f)
+    atEqual(f: Pathfinder<V>, leftSeekBias: boolean): BinTreeIterator<V> {
+        return BinTreeIterator.atEqual(this.root, f, leftSeekBias)
     }
 
     [Symbol.iterator](): IterableIterator<V> {

@@ -43,7 +43,7 @@ export class CowRope {
             } else {
                 return 0
             }
-        })
+        }, false)
         // Build the sequence of operations to perform on the list
         let ops: ListOp<string>[]
         const value = it.value

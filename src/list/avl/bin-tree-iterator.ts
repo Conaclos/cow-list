@@ -37,6 +37,20 @@ const ascendNext = <V>(path: BinNode<V>[]): void => {
 }
 
 /**
+ * @internal
+ * Go to the node that succeeds the rightmost node of the tree rooted by the
+ * node indicated by the path.
+ *
+ * @param path non-empty mutable path of binary node
+ */
+const ascendPrev = <V>(path: BinNode<V>[]): void => {
+    let prev: BinNode<V> | undefined
+    do {
+        prev = path.pop()
+    } while (path.length !== 0 && lastOf(path).left === prev)
+}
+
+/**
  * Iterator for in-order traversal of a binary tree.
  */
 export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
@@ -57,11 +71,13 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
     /**
      * @param root tree root
      * @param f function to choose where the iterator starts
+     * @param leftSeekBias seek bias
      * @return iterator that starts the traversal at a chosen position.
      */
     static atEqual<V>(
         root: BinNode<V> | undefined,
-        f: Pathfinder<V>
+        f: Pathfinder<V>,
+        leftSeekBias: boolean
     ): BinTreeIterator<V> {
         let dir: Ordering = Ordering.AFTER
         const path: BinNode<V>[] = []
@@ -84,9 +100,20 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
                 curr = curr.right
             }
         }
-        if (path.length !== 0 && dir === Ordering.AFTER) {
-            ascendNext(path)
+
+        if (dir === Ordering.AFTER && path.length !== 0) {
+            if (leftSeekBias) {
+                index--
+                summary = summary - lengthOf(lastOf(path).value)
+            } else {
+                ascendNext(path)
+            }
+        } else if (dir === Ordering.BEFORE && leftSeekBias && index !== 0) {
+            ascendPrev(path)
+            index--
+            summary = summary - lengthOf(lastOf(path).value)
         }
+
         return new BinTreeIterator(path, index, summary)
     }
 

@@ -50,13 +50,23 @@ export interface List<V> extends Iterable<V> {
 
     /**
      * Seek for a specific position in the list based on values and summaries.
-     * The search has an after bias; i.e. the application of {@code f} to the
-     * current value of the iterator returns Ordering.BEFORE or Ordering.EQUAL.
+     *
+     * The iterator starts on the value that returns 0 (EQUAL) when passed
+     *  through {@code f}.
+     * If none value returns 0, then the behavior depends on
+     *  {@code leftSeekBias}:
+     * - If {@code leftSeekBias} is disabled, then the iterator starts on the
+     *   lowest value that returns -1 (BEFORE) when passed through {@code f}.
+     *   If no value returns -1, then the iterator is completed
+     * - If {@code leftSeekBias} is enabled, then the iterator starts on the
+     *   biggest value that returns 1 (AFTER) when passed through {@code f}.
+     *   If no value returns 1, then the iterator starts at the first value.
      *
      * @param f function to guide the search in the list
+     * @param leftSeekBias
      * @return iterator that starts to a chosen value
      */
-    atEqual(f: Pathfinder<V>): ListIterator<V>
+    atEqual(f: Pathfinder<V>, leftSeekBias: boolean): ListIterator<V>
 
     [Symbol.iterator](): IterableIterator<V>
 }

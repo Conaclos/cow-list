@@ -23,8 +23,7 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
 
     static from<V>(vs: ArrayLike<V>): AvlList<V> {
         const ver = INITIAL_VERSION
-        const root =
-            vs.length !== 0 ? AvlNode.from(vs, 0, vs.length, ver) : undefined
+        const root = AvlNode.from(vs, 0, vs.length, ver)
         return new AvlList(root, ver)
     }
 

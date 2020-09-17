@@ -40,15 +40,17 @@ export class AvlNode<V> implements BinNode<V> {
         start: u32,
         length: u32,
         ver: Version
-    ): AvlNode<V> {
-        if (length !== 1) {
+    ): AvlNode<V> | undefined {
+        if (length === 0) {
+            return undefined
+        } else if (length === 1) {
+            return AvlNode.leaf(vs[start], ver)
+        } else {
             const mid = start + (length >> 1) // integer division by 2
             const l = AvlNode.from(vs, start, mid - start, ver)
             const rStart = mid + 1
             const r = AvlNode.from(vs, rStart, start + length - rStart, ver)
             return new AvlNode(l, vs[mid], ver, r)
-        } else {
-            return AvlNode.leaf(vs[start], ver)
         }
     }
 

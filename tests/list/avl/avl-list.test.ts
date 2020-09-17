@@ -16,11 +16,18 @@ test("avl-from-empty-array", (t) => {
     t.deepEqual(emp.toArray(), [])
 })
 
-test("avl-from-non-empty-array", (t) => {
+test("avl-from-non-empty-array-odd-length", (t) => {
     const emp = AvlList.from(["a", "b", "c"])
 
     t.is(emp.length, 3)
     t.deepEqual(emp.toArray().join(""), "abc")
+})
+
+test("avl-from-non-empty-array-even-length", (t) => {
+    const emp = AvlList.from(["a", "b", "c", "d"])
+
+    t.is(emp.length, 4)
+    t.deepEqual(emp.toArray().join(""), "abcd")
 })
 
 test("avl-insert", (t) => {

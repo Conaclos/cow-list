@@ -20,7 +20,7 @@ export class CowRope {
     }
 
     get length(): u32 {
-        return this.repr.summary()
+        return this.repr.summary
     }
 
     toString(): string {

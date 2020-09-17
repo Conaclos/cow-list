@@ -26,9 +26,9 @@ export interface List<V> extends Iterable<V> {
     readonly length: u32
 
     /**
-     * @return cumulated summary of values
+     * Cumulative summary of all values
      */
-    summary(): u32
+    readonly summary: u32
 
     /**
      * @param f function to accumulate values

@@ -73,7 +73,7 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
         return this.root !== undefined ? this.root.count : 0
     }
 
-    summary(): u32 {
+    get summary(): u32 {
         return summaryOf(this.root)
     }
 

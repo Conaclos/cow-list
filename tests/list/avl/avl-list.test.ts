@@ -30,6 +30,27 @@ test("avl-from-non-empty-array-even-length", (t) => {
     t.deepEqual(emp.toArray().join(""), "abcd")
 })
 
+test("avl-from-iterable-empty", (t) => {
+    const emp = AvlList.fromIterable([][Symbol.iterator](), 0)
+
+    t.is(emp.length, 0)
+    t.deepEqual(emp.toArray(), [])
+})
+
+test("avl-from-iterable-non-empty-odd-length", (t) => {
+    const emp = AvlList.fromIterable(["a", "b", "c"][Symbol.iterator](), 3)
+
+    t.is(emp.length, 3)
+    t.deepEqual(emp.toArray().join(""), "abc")
+})
+
+test("avl-from-iterable-non-empty-even-length", (t) => {
+    const emp = AvlList.fromIterable(["a", "b", "c", "d"][Symbol.iterator](), 4)
+
+    t.is(emp.length, 4)
+    t.deepEqual(emp.toArray().join(""), "abcd")
+})
+
 test("avl-insert", (t) => {
     const l = AvlList.empty<string>()
     l.insert(0, "c")

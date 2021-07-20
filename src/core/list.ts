@@ -124,6 +124,13 @@ export interface CowListConstructor {
      * @return list that contains the values of {@code vs} in the same order.
      */
     from<V>(vs: ArrayLike<V>): CowList<V>
+
+    /**
+     * @param vs values to insert
+     * @param len number of value to iterate
+     * @return list that contains the values of {@code vs} in the same order.
+     */
+    fromIterable<V>(vs: Iterable<V>, len: number): CowList<V>
 }
 
 export const CowList: CowListConstructor = AvlList
@@ -184,6 +191,13 @@ export interface MutListConstructor {
      * @return list that contains the values of {@code vs} in the same order
      */
     from<V>(vs: ArrayLike<V>): MutList<V>
+
+    /**
+     * @param vs values to insert
+     * @param len number of value to iterate
+     * @return list that contains the values of {@code vs} in the same order.
+     */
+    fromIterable<V>(vs: Iterable<V>, len: number): MutList<V>
 }
 
 export const MutList: MutListConstructor = AvlList

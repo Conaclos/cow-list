@@ -54,6 +54,31 @@ export class AvlNode<V> implements BinNode<V> {
         }
     }
 
+    static fromIterator<V>(
+        vs: Iterator<V>,
+        start: u32,
+        length: u32,
+        ver: Version
+    ): AvlNode<V> | undefined {
+        if (length === 0) {
+            return undefined
+        } else if (length === 1) {
+            return AvlNode.leaf(vs.next().value, ver)
+        } else {
+            const mid = start + (length >> 1) // integer division by 2
+            const l = AvlNode.fromIterator(vs, start, mid - start, ver)
+            const midVal = vs.next().value
+            const rStart = mid + 1
+            const r = AvlNode.fromIterator(
+                vs,
+                rStart,
+                start + length - rStart,
+                ver
+            )
+            return new AvlNode(l, midVal, ver, r)
+        }
+    }
+
     /**
      * Left child.
      */

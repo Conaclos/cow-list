@@ -27,6 +27,12 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
         return new AvlList(root, ver)
     }
 
+    static fromIterable<V>(vs: Iterable<V>, len: u32): AvlList<V> {
+        const ver = INITIAL_VERSION
+        const root = AvlNode.fromIterator(vs[Symbol.iterator](), 0, len, ver)
+        return new AvlList(root, ver)
+    }
+
     /**
      * Tree root.
      */

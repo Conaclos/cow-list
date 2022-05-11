@@ -1,7 +1,8 @@
 # Cow List 🐄🐄🐄
 
-[![travis][travis-image]][travis-url]
-[![NPM version][npm-image]][npm-url]
+[![CI status][ci-img]][ci-url]
+[![Coverage percentage][coveralls-img]][coveralls-url]
+[![NPM version][npm-version-img]][npm-url]
 
 _Cow List_ provides a [Copy-On-Write][cow] iterable list that supports logarithmic searches.
 It provides also a mutable iterable List with versioning capabilities.
@@ -84,7 +85,7 @@ for (const v of l) {
 
 ## Advanced usages
 
-Please take a look to the provided [examples](./examples).
+Please take a look to the provided [examples](./src/examples/).
 
 ## FAQ
 
@@ -99,10 +100,12 @@ The data structure combines a search tree and a rope.
 For now, _Cow List_ uses a [partially persistent][pp] [AVL tree][avl].
 This could change in the future in order to achieve better performances.
 
-[travis-image]: https://img.shields.io/travis/Conaclos/cow-list/master.svg
-[travis-url]: https://travis-ci.org/Conaclos/cow-list
-[npm-image]: https://img.shields.io/npm/v/cow-list.svg?style=flat-square
+[ci-img]: https://flat.badgen.net/github/checks/Conaclos/cow-list/?label=CI
+[ci-url]: https://github.com/Conaclos/cow-list/actions/workflows/ci.yml
+[npm-version-img]: https://flat.badgen.net/npm/v/cow-list
 [npm-url]: https://www.npmjs.com/package/cow-list
+[coveralls-img]: https://flat.badgen.net/coveralls/c/github/Conaclos/cow-list
+[coveralls-url]: https://coveralls.io/github/Conaclos/cow-list?branch=main
 [cow]: https://en.wikipedia.org/wiki/Copy-on-write
 [rope]: https://en.wikipedia.org/wiki/Rope_%28data_structure%29
 [avl]: https://en.wikipedia.org/wiki/AVL_tree

@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "ES2020",
+    "paths": { "cow-list": ["./index.js"] }
+  },
+  "include": ["./**/*.ts"]
+}

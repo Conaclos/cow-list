@@ -1,7 +1,7 @@
-import { lengthOf } from "../../core/lengthy.js"
-import type { Version } from "../../core/version.js"
-import type { u32 } from "../../util/number.js"
-import { reduceOf } from "../../util/reducible.js"
+import { lengthOf } from "../core/lengthy.js"
+import type { Version } from "../core/version.js"
+import type { u32 } from "../util/number.js"
+import { reduceOf } from "../util/reducible.js"
 import { countOf, leftmost, summaryOf } from "./bin-node.js"
 import type { BinNode } from "./bin-node.js"
 

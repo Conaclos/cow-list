@@ -1,7 +1,6 @@
-import test from "ava"
-import type { Version } from "../../../src/core/version.js"
-import { AvlNode } from "../../../src/list/avl/avl-node.js"
-import { toArrayed, toNode } from "../../_helpers/_arrayed-node-test.js"
+import test from "oletus"
+import { AvlNode } from "./avl-node.js"
+import type { Version } from "../core/version.js"
 
 const V0: Version = 0
 const V1: Version = 1
@@ -9,12 +8,12 @@ const V1: Version = 1
 test("leaf-node", (t) => {
     const leaf = AvlNode.leaf("c", V0)
 
-    t.is(leaf.left, undefined)
-    t.is(leaf.value, "c")
-    t.is(leaf.version, V0)
-    t.is(leaf.right, undefined)
-    t.is(leaf.count, V1)
-    t.is(leaf.rank, V1)
+    t.deepEqual(leaf.left, undefined)
+    t.deepEqual(leaf.value, "c")
+    t.deepEqual(leaf.version, V0)
+    t.deepEqual(leaf.right, undefined)
+    t.deepEqual(leaf.count, V1)
+    t.deepEqual(leaf.rank, V1)
 })
 
 test("leaf-arrayed-node", (t) => {
@@ -34,7 +33,7 @@ test("reduce", (t) => {
 
     const concat = root.reduce((acc, v) => acc + v, "0")
 
-    t.is(concat, "0abc")
+    t.deepEqual(concat, "0abc")
 })
 
 test("mut-insert-at-left", (t) => {
@@ -47,7 +46,7 @@ test("mut-insert-at-left", (t) => {
 
     const newRoot = root.insert(0, "a", V0) // (1)
 
-    t.is(newRoot, root, "is mutated")
+    t.deepEqual(newRoot, root, "deepEqual mutated")
     t.deepEqual(root, toNode([["a"], "c", []], V0))
 })
 
@@ -75,7 +74,7 @@ test("mut-insert-at-right", (t) => {
 
     const newRoot = root.insert(1, "e", V0) // (1)
 
-    t.is(newRoot, root, "is mutated")
+    t.deepEqual(newRoot, root, "deepEqual mutated")
     t.deepEqual(root, toNode([[], "c", ["e"]], V0))
 })
 
@@ -103,7 +102,7 @@ test("mut-replace-at-root", (t) => {
 
     const newRoot = root.replace(0, "x", V0) // (1)
 
-    t.is(root, newRoot, "is mutated")
+    t.deepEqual(root, newRoot, "deepEqual mutated")
     t.deepEqual(root, toNode(["x"], V0))
 })
 
@@ -129,7 +128,7 @@ test("mut-replace-at-left", (t) => {
 
     const newRoot = root.replace(0, "x", V0) // (1)
 
-    t.is(root, newRoot, "is mutated")
+    t.deepEqual(root, newRoot, "deepEqual mutated")
     t.deepEqual(root, toNode([["x"], "c", []], V0))
 })
 
@@ -157,7 +156,7 @@ test("mut-replace-at-right", (t) => {
 
     const newRoot = root.replace(1, "x", V0) // (1)
 
-    t.is(root, newRoot, "is mutated")
+    t.deepEqual(root, newRoot, "deepEqual mutated")
     t.deepEqual(root, toNode([[], "c", ["x"]], V0))
 })
 
@@ -182,7 +181,7 @@ test("delete-at-root", (t) => {
 
     const newRoot = root.delete(0, V0)
 
-    t.is(newRoot, undefined)
+    t.deepEqual(newRoot, undefined)
     t.deepEqual(root, toNode(["c"], V0))
 })
 
@@ -196,7 +195,7 @@ test("mut-delete-at-left", (t) => {
 
     const newRoot = root.delete(0, V0) // (1)
 
-    t.is(root, newRoot, "is mutated")
+    t.deepEqual(root, newRoot, "deepEqual mutated")
     t.deepEqual(root, toNode(["c"], V0))
 })
 
@@ -224,7 +223,7 @@ test("mut-delete-at-right", (t) => {
 
     const newRoot = root.delete(1, V0) // (1)
 
-    t.is(newRoot, root, "is mutated")
+    t.deepEqual(newRoot, root, "deepEqual mutated")
     t.deepEqual(root, toNode(["c"], V0))
 })
 
@@ -256,7 +255,7 @@ test("balance-r-rotation", (t) => {
     n = n.insert(0, "a", V0) // (2)
 
     t.deepEqual(n, toNode([["a"], "b", ["c"]], V0))
-    t.true(n.isBalanced())
+    t.ok(n.isBalanced())
 })
 
 test("balance-l-rotation", (t) => {
@@ -271,7 +270,7 @@ test("balance-l-rotation", (t) => {
     n = n.insert(2, "e", V0) // (2)
 
     t.deepEqual(n, toNode([["c"], "d", ["e"]], V0))
-    t.true(n.isBalanced())
+    t.ok(n.isBalanced())
 })
 
 test("balance-lr-rotation", (t) => {
@@ -286,7 +285,7 @@ test("balance-lr-rotation", (t) => {
     n = n.insert(1, "b", V0) // (2)
 
     t.deepEqual(n, toNode([["a"], "b", ["c"]], V0))
-    t.true(n.isBalanced())
+    t.ok(n.isBalanced())
 })
 
 test("balance-rl-rotation", (t) => {
@@ -301,7 +300,7 @@ test("balance-rl-rotation", (t) => {
     n = n.insert(1, "d", V0) // (2)
 
     t.deepEqual(n, toNode([["c"], "d", ["e"]], V0))
-    t.true(n.isBalanced())
+    t.ok(n.isBalanced())
 })
 
 test("delete-at-root-with-left", (t) => {
@@ -314,7 +313,6 @@ test("delete-at-root-with-left", (t) => {
 
     const newRoot = root.delete(1, V0) // (1)
 
-    t.not(root, newRoot, "is mutated")
     t.deepEqual(root, toNode([["a"], "c", []], V0))
     t.deepEqual(newRoot, toNode(["a"], V0))
 })
@@ -343,7 +341,7 @@ test("mut-delete-at-root-with-children", (t) => {
     */
     const root = toNode([["a"], "c", [["d"], "e", []]], V0)
 
-    const newRoot = root.delete(1, V0) // (1)
+    root.delete(1, V0) // (1)
 
     t.deepEqual(root, toNode([["a"], "d", ["e"]], V0))
 })
@@ -363,3 +361,40 @@ test("delete-at-root-with-children", (t) => {
     t.deepEqual(root, toNode([["a"], "c", [["d"], "e", []]], V0))
     t.deepEqual(newRoot, toNode([["a", V0], "d", ["e"]], V1))
 })
+
+/**
+ * Provide a way to build an avl tree in a literal way
+ */
+
+export type ArrayedNonEmptyNode<V> =
+    | readonly [V]
+    | readonly [V, Version]
+    | readonly [ArrayedNode<V>, V, ArrayedNode<V>]
+    | readonly [ArrayedNode<V>, V, Version, ArrayedNode<V>]
+
+export type ArrayedNode<V> = readonly [] | ArrayedNonEmptyNode<V>
+
+export function toNode<V>(a: ArrayedNonEmptyNode<V>, v: Version): AvlNode<V>
+export function toNode<V>(a: ArrayedNode<V>, v: Version): AvlNode<V> | undefined
+export function toNode<V>(
+    a: ArrayedNode<V>,
+    ver: Version
+): AvlNode<V> | undefined {
+    switch (a.length) {
+        case 1:
+            return AvlNode.leaf(a[0], ver)
+        case 2:
+            return AvlNode.leaf(a[0], a[1])
+        case 3:
+            return new AvlNode(toNode(a[0], ver), a[1], ver, toNode(a[2], ver))
+        case 4:
+            return new AvlNode(toNode(a[0], ver), a[1], a[2], toNode(a[3], ver))
+    }
+    return undefined
+}
+
+export function toArrayed<V>(n: AvlNode<V>): ArrayedNode<V> {
+    const l = n.left !== undefined ? toArrayed(n.left) : ([] as const)
+    const r = n.right !== undefined ? toArrayed(n.right) : ([] as const)
+    return [l, n.value, n.version, r]
+}

@@ -14,72 +14,60 @@
   "license": "Zlib",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Conaclos/cow-list"
+    "url": "git+https://github.com/Conaclos/cow-list.git"
   },
   "bugs": {
     "url": "https://github.com/Conaclos/cow-list/issues"
   },
-  "type": "commonjs",
-  "source": "src/index.ts",
-  "main": "dist/main/index.js",
-  "exports": {
-    "require": "./dist/main/index.js",
-    "default": "./dist/module/index.js"
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
-  "module": "dist/module/index.js",
-  "es2015": "dist/es2015/index.js",
-  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "types": "dist/",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "es2015": "dist/index.js",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.js"
+  },
   "sideEffects": false,
   "files": [
-    "dist",
-    "src"
+    "dist/*.cjs",
+    "dist/*.d.ts",
+    "dist/*.js",
+    "dist/**/*.d.ts",
+    "dist/**/*.js",
+    "!dist/**/*.test.js",
+    "!dist/**/*.spec.js"
   ],
-  "engines": {
-    "node": ">=8"
+  "directories": {
+    "test": "tests"
   },
   "scripts": {
-    "prebuild": "npm run clean",
-    "build": "tsc -b tsconfig.main.json tsconfig.module.json tsconfig.types.json",
-    "clean": "rm -rf coverage dist .tested",
-    "pretest": "tsc",
-    "test": "c8 ava"
-  },
-  "ava": {
-    "files": [
-      "tests/**/*.test.ts",
-      "specs/**/*.test.ts"
-    ],
-    "typescript": {
-      "rewritePaths": {
-        "tests/": ".tested/tests/",
-        "specs/": ".tested/specs/"
-      }
-    }
-  },
-  "standard-version": {
-    "scripts": {
-      "prerelease": "npm run clean && npm test && npm run build"
-    }
+    "build": "npm run build:dts && npm run build:esm && npm run build:cjs",
+    "build:dts": "tsc --build src && cp dist/index.d.ts dist/index.d.cts",
+    "build:esm": "esbuild --log-level=warning --outdir=dist src/*/*.ts src/*.ts",
+    "build:cjs": "esbuild --bundle --platform=node src/index.ts > dist/index.cjs",
+    "check": "npm run check:types && npm run check:format && npm run check:lint",
+    "check:format": "prettier --loglevel=warn --check src *.json *.md",
+    "check:lint": "denolint src",
+    "check:types": "tsc --build src/tsconfig-test.json",
+    "clean": "rm -rf coverage dist",
+    "prepare": "validate-commit-msg",
+    "prepublishOnly": "npm run clean && npm test",
+    "pretest": "npm run build",
+    "test": "npm run check && npm run test:units",
+    "test:units": "oletus dist/**/*.spec.js dist/**/*.test.js",
+    "coverage": "c8 --reporter=lcovonly npm test"
   },
   "devDependencies": {
-    "@ava/typescript": "^1.1.1",
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@types/node": "^14.10.1",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "@typescript-eslint/parser": "^4.1.0",
-    "ava": "^3.12.1",
-    "ava-fast-check": "^3.0.0",
-    "c8": "^7.3.0",
-    "eslint": "^7.8.1",
-    "eslint-config-conaclos": "^3.0.0",
-    "fast-check": "^2.3.0",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.3.0",
-    "prettier": "~2.1.1",
-    "typescript": "~4.0.2"
-  },
-  "dependencies": {
-    "tslib": "^2.0.1"
+    "@node-rs/deno-lint": "^1.13.1",
+    "esbuild": "^0.14.43",
+    "fast-check": "^3.0.0",
+    "oletus": "3.3.0",
+    "prettier": "2.6.2",
+    "typescript": "4.7.3",
+    "validate-commit-message": "3.2.0"
   }
 }

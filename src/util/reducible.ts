@@ -1,5 +1,3 @@
-import { u32 } from "./number.js"
-
 /**
  * Data strcuture that can be reduced.
  */

@@ -1,6 +1,5 @@
-import { CowList, ins, sub } from "../src/index.js"
-import type { ListOp } from "../src/index.js"
-import type { u32 } from "../src/util/number.js"
+import test from "oletus"
+import { CowList, type ListOp, ins, sub } from "cow-list"
 
 /**
  * String with logarithmic insertions.
@@ -19,7 +18,7 @@ export class CowRope {
         this.repr = repr
     }
 
-    get length(): u32 {
+    get length(): number {
         return this.repr.summary
     }
 
@@ -67,3 +66,39 @@ export class CowRope {
         return new CowRope(repr.applied(ops))
     }
 }
+
+test("cow-rope-empty", (t) => {
+    const r = CowRope.empty()
+
+    t.deepEqual(r.length, 0)
+    t.deepEqual(r.toString(), "")
+})
+
+test("cow-rope-insertions", (t) => {
+    const r1 = CowRope.empty()
+    const r2 = r1.inserted(0, "cd")
+    const r3 = r2.inserted(2, "gh")
+    const r4 = r3.inserted(2, "ef")
+    const r5 = r4.inserted(0, "ab")
+    const r6 = r5.inserted(8, "ij")
+
+    t.deepEqual(r2.length, 2)
+    t.deepEqual(r2.toString(), "cd")
+    t.deepEqual(r3.length, 4)
+    t.deepEqual(r3.toString(), "cdgh")
+    t.deepEqual(r4.length, 6)
+    t.deepEqual(r4.toString(), "cdefgh")
+    t.deepEqual(r5.length, 8)
+    t.deepEqual(r5.toString(), "abcdefgh")
+    t.deepEqual(r6.length, 10)
+    t.deepEqual(r6.toString(), "abcdefghij")
+})
+
+test("cow-rope-split", (t) => {
+    const r1 = CowRope.empty()
+    const r2 = r1.inserted(0, "abef")
+    const r3 = r2.inserted(2, "cd")
+
+    t.deepEqual(r3.length, 6)
+    t.deepEqual(r3.toString(), "abcdef")
+})

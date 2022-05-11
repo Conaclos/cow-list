@@ -1,4 +1,4 @@
-import type { u32 } from "../../util/number.js"
+import type { u32 } from "../util/number.js"
 
 /**
  * Valued binary node with extra metadata.

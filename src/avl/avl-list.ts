@@ -1,14 +1,10 @@
-import type { CowList, MutList, Pathfinder } from "../../core/list.js"
-import {
-    LIST_DEL_TYPE,
-    LIST_INS_TYPE,
-    LIST_SUB_TYPE,
-} from "../../core/list-op.js"
-import type { ListOp } from "../../core/list-op.js"
-import type { Version } from "../../core/version.js"
-import { arrayPush } from "../../util/array.js"
-import type { u32 } from "../../util/number.js"
-import { reduceOf } from "../../util/reducible.js"
+import type { CowList, MutList, Pathfinder } from "../core/list.js"
+import { LIST_DEL_TYPE, LIST_INS_TYPE, LIST_SUB_TYPE } from "../core/list-op.js"
+import type { ListOp } from "../core/list-op.js"
+import type { Version } from "../core/version.js"
+import { arrayPush } from "../util/array.js"
+import type { u32 } from "../util/number.js"
+import { reduceOf } from "../util/reducible.js"
 import { AvlNode } from "./avl-node.js"
 import { BinTreeIterator } from "./bin-tree-iterator.js"
 import { summaryOf } from "./bin-node.js"
@@ -45,7 +41,7 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
     /**
      * List version.
      *
-     * This is used to determinates if the list must be mutated o
+     * This is used to determinate if the list must be mutated o
      * copied on write.
      */
     protected declare version: Version

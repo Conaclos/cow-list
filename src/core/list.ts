@@ -1,4 +1,4 @@
-import { AvlList } from "../list/avl/avl-list.js"
+import { AvlList } from "../avl/avl-list.js"
 import type { u32 } from "../util/number.js"
 import type { Ordering } from "../util/ordering.js"
 import type { ListIterator } from "./list-iterator.js"

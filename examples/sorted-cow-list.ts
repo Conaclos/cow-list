@@ -1,5 +1,5 @@
-import { CowList, ins, sub } from "../src/index"
-import { u32 } from "../src/util/number"
+import { CowList, ins, sub } from "../src/index.js"
+import type { u32 } from "../src/util/number.js"
 
 /**
  * Three-way comparison

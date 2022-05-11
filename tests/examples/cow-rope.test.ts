@@ -1,5 +1,5 @@
 import test from "ava"
-import { CowRope } from "../../examples/cow-rope"
+import { CowRope } from "../../examples/cow-rope.js"
 
 test("cow-rope-empty", (t) => {
     const r = CowRope.empty()

@@ -1,3 +1,3 @@
-export * from "./core/list"
-export type { ListIterator } from "./core/list-iterator"
-export * from "./core/list-op"
+export * from "./core/list.js"
+export type { ListIterator } from "./core/list-iterator.js"
+export * from "./core/list-op.js"

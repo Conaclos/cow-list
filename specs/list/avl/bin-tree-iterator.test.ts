@@ -1,7 +1,6 @@
 import { fc, testProp } from "ava-fast-check"
-import { AvlList } from "../../../src/list/avl/avl-list"
-import { asU32Between } from "../../_helpers/_rand-test"
-import { Ordering } from "../../../src/util/ordering"
+import { AvlList } from "../../../src/list/avl/avl-list.js"
+import { asU32Between } from "../../_helpers/_rand-test.js"
 
 testProp("at-first", [fc.array(fc.float(), 0, 200)], (t, values) => {
     const treeList = AvlList.empty<number>()

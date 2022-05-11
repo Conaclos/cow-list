@@ -1,11 +1,11 @@
-import { lengthOf } from "../../core/lengthy"
-import type { Pathfinder } from "../../core/list"
-import type { ListIterator } from "../../core/list-iterator"
-import { lastOf } from "../../util/array"
-import type { u32 } from "../../util/number"
-import { Ordering } from "../../util/ordering"
-import { countOf, summaryOf } from "./bin-node"
-import type { BinNode } from "./bin-node"
+import { lengthOf } from "../../core/lengthy.js"
+import type { Pathfinder } from "../../core/list.js"
+import type { ListIterator } from "../../core/list-iterator.js"
+import { lastOf } from "../../util/array.js"
+import type { u32 } from "../../util/number.js"
+import { Ordering } from "../../util/ordering.js"
+import { countOf, summaryOf } from "./bin-node.js"
+import type { BinNode } from "./bin-node.js"
 
 /**
  * @internal

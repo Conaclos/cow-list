@@ -1,6 +1,6 @@
 import test from "ava"
-import { AvlList } from "../../../src/list/avl/avl-list"
-import { Ordering } from "../../../src/util/ordering"
+import { AvlList } from "../../../src/list/avl/avl-list.js"
+import { Ordering } from "../../../src/util/ordering.js"
 
 /**
  * Three-way comparison

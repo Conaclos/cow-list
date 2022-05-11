@@ -1,4 +1,4 @@
-import type { u32 } from "../util/number"
+import type { u32 } from "../util/number.js"
 
 export const LIST_DEL_TYPE = 0
 export const LIST_INS_TYPE = 1

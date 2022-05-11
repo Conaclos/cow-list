@@ -1,5 +1,5 @@
-import type { Version } from "../../src/core/version"
-import { AvlNode } from "../../src/list/avl/avl-node"
+import type { Version } from "../../src/core/version.js"
+import { AvlNode } from "../../src/list/avl/avl-node.js"
 
 /**
  * Provide a way to build an avl tree in a literal way

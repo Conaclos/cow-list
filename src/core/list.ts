@@ -1,8 +1,8 @@
-import { AvlList } from "../list/avl/avl-list"
-import type { u32 } from "../util/number"
-import type { Ordering } from "../util/ordering"
-import type { ListIterator } from "./list-iterator"
-import type { ListOp } from "./list-op"
+import { AvlList } from "../list/avl/avl-list.js"
+import type { u32 } from "../util/number.js"
+import type { Ordering } from "../util/ordering.js"
+import type { ListIterator } from "./list-iterator.js"
+import type { ListOp } from "./list-op.js"
 
 /**
  * Function to guide a logarithmic search.

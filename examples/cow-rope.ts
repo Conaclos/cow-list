@@ -1,6 +1,6 @@
-import { CowList, ins, sub } from "../src/index"
-import type { ListOp } from "../src/index"
-import { u32 } from "../src/util/number"
+import { CowList, ins, sub } from "../src/index.js"
+import type { ListOp } from "../src/index.js"
+import type { u32 } from "../src/util/number.js"
 
 /**
  * String with logarithmic insertions.

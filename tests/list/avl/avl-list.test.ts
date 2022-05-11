@@ -1,6 +1,6 @@
 import test from "ava"
-import { del, ins, sub } from "../../../src/"
-import { AvlList } from "../../../src/list/avl/avl-list"
+import { del, ins, sub } from "../../../src/index.js"
+import { AvlList } from "../../../src/list/avl/avl-list.js"
 
 test("avl-empty", (t) => {
     const emp = AvlList.empty<string>()

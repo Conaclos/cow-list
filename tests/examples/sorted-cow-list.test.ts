@@ -1,5 +1,5 @@
 import test from "ava"
-import { SortedCowList } from "../../examples/sorted-cow-list"
+import { SortedCowList } from "../../examples/sorted-cow-list.js"
 
 test("sorted-cow-list-empty", (t) => {
     const l = SortedCowList.empty()

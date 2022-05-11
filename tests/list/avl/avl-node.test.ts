@@ -1,7 +1,7 @@
 import test from "ava"
-import type { Version } from "../../../src/core/version"
-import { AvlNode } from "../../../src/list/avl/avl-node"
-import { toArrayed, toNode } from "../../_helpers/_arrayed-node-test"
+import type { Version } from "../../../src/core/version.js"
+import { AvlNode } from "../../../src/list/avl/avl-node.js"
+import { toArrayed, toNode } from "../../_helpers/_arrayed-node-test.js"
 
 const V0: Version = 0
 const V1: Version = 1

@@ -1,44 +1,61 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+This project adheres to [Semantic Versioning][semver].
+
+## Unreleased
+
+-   Allow to create a list from an iterable
+
+    You can now build a list from any iterable object.
+    In the following example we use a generator to create a list of three
+    random numbers:
+
+    ```js
+    function* rand() {
+        while (true) {
+            yield Math.random()
+        }
+    }
+
+    const l = CowList.fromIterable(rand(), 3)
+    const ml = MutList.fromIterable(rand(), 3)
+    ```
+
+    Note that you must provide the number of items to pick from the
+    iterable object in the second parameter.
 
 ## 2.0.0 (2020-09-17)
 
-### ⚠ BREAKING CHANGES
+-   Add seek bias for list iterators.
 
--   List#atEqual has a new parameter to control the seek bias.
+    As a consequence, List#atEqual has a new parameter to control the seek bias.
 
-You can simply update this old code:
+    You can simply update this old code:
 
-```js
-list.atEqual(f)
-```
+    ```js
+    list.atEqual(f)
+    ```
 
-with:
+    with:
 
-```js
-list.atEqual(f, false)
-```
+    ```js
+    list.atEqual(f, false)
+    ```
 
--   Update following codes:
+-   Make summary a property of list interface
 
-```js
-list.summary()
-```
+    Update following codes:
 
-with:
+    ```js
+    list.summary()
+    ```
 
-```
-list.summary
-```
+    with:
 
-### Features
+    ```
+    list.summary
+    ```
 
--   add seek biais for list iterators. ([87d20d5](https://github.com/Conaclos/cow-list/commit/87d20d5c5712afa29b36997e2fd9c31296d0ce27))
--   make summary a property of list interface ([dce2cb3](https://github.com/Conaclos/cow-list/commit/dce2cb32ffded5ea7dbfda8d329afc917f8822f4))
+-   Fix infinite recursion of list from array
 
-### Bug Fixes
-
--   list from array without infinite recursion ([c3e4ae9](https://github.com/Conaclos/cow-list/commit/c3e4ae9bf490d1df97e2a32dd14d9cff04108c3e))
-
-## 1.0.0 (2020-09-12)
+[semver]: https://semver.org/spec/v2.0.0.html

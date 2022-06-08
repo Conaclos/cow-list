@@ -11,7 +11,7 @@
     "versioning"
   ],
   "author": "Victorien Elvinger (victorien.elvinger.fr)",
-  "license": "Zlib",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Conaclos/cow-list.git"

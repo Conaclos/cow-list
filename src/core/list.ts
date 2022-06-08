@@ -1,3 +1,6 @@
+//! Copyright (c) 2019 Victorien Elvinger
+//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+
 import { AvlList } from "../avl/avl-list.js"
 import type { u32 } from "../util/number.js"
 import type { Ordering } from "../util/ordering.js"

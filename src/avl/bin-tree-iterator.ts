@@ -1,3 +1,6 @@
+//! Copyright (c) 2019 Victorien Elvinger
+//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+
 import { lengthOf } from "../core/lengthy.js"
 import type { Pathfinder } from "../core/list.js"
 import type { ListIterator } from "../core/list-iterator.js"

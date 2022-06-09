@@ -59,7 +59,9 @@
     "pretest": "npm run build",
     "test": "npm run check && npm run test:units",
     "test:units": "oletus dist/**/*.spec.js dist/**/*.test.js",
-    "coverage": "c8 --reporter=lcovonly npm test"
+    "coverage": "c8 --reporter=lcovonly npm test",
+    "preversion": "grep --quiet Unreleased CHANGELOG*",
+    "version": "sed --in-place s/Unreleased/$npm_package_version/ CHANGELOG*; git add CHANGELOG*"
   },
   "devDependencies": {
     "@node-rs/deno-lint": "^1.13.1",

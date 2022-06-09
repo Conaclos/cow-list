@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## Unreleased (2022-06-09)
 
 -   Allow to create a list from an iterable
 

@@ -1,7 +1,7 @@
 //! Copyright (c) 2019 Victorien Elvinger
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
-import { lengthOf } from "../core/lengthy.js"
+import { lengthOf } from "../util/lengthy.js"
 import type { Version } from "../core/version.js"
 import type { u32 } from "../util/number.js"
 import { reduceOf } from "../util/reducible.js"

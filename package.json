@@ -41,9 +41,6 @@
     "!dist/**/*.test.js",
     "!dist/**/*.spec.js"
   ],
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "build": "npm run build:dts && npm run build:esm && npm run build:cjs",
     "build:dts": "tsc --build src && cp dist/index.d.ts dist/index.d.cts",

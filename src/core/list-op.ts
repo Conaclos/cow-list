@@ -107,7 +107,7 @@ const op = <T extends OpType, V>(type: T, index: u32, value: V): Op<T, V> => ({
  * @param index
  * @return Deletion of the value after {@code index}.
  */
-export const del = (index: u32): ListDel => op(LIST_DEL_TYPE, index, undefined)
+export const del = (index: u32): ListDel => op(LIST_DEL_TYPE, index, null)
 
 /**
  * @param index

@@ -10,7 +10,7 @@ export interface BinNode<V> {
     /**
      * Optional left child
      */
-    readonly left: BinNode<V> | undefined
+    readonly left: BinNode<V> | null
 
     /**
      * Stored value
@@ -20,7 +20,7 @@ export interface BinNode<V> {
     /**
      * Optional right child
      */
-    readonly right: BinNode<V> | undefined
+    readonly right: BinNode<V> | null
 
     /**
      * Total number of nodes in the subtree rooted by this.
@@ -35,17 +35,17 @@ export interface BinNode<V> {
 
 /**
  * @param n
- * @returns Count of {@code n} or 0 if undefined.
+ * @returns Count of {@code n} or 0 if null.
  */
-export const countOf = <V>(n: BinNode<V> | undefined): u32 =>
-    n !== undefined ? n.count : 0
+export const countOf = <V>(n: BinNode<V> | null): u32 =>
+    n !== null ? n.count : 0
 
 /**
  * @param n
- * @returns Summary of {@code n} or 0 if undefined.
+ * @returns Summary of {@code n} or 0 if null.
  */
-export const summaryOf = <V>(n: BinNode<V> | undefined): u32 =>
-    n !== undefined ? n.summary : 0
+export const summaryOf = <V>(n: BinNode<V> | null): u32 =>
+    n !== null ? n.summary : 0
 
 export const leftmost = <V>(n: BinNode<V>): V =>
-    n.left !== undefined ? leftmost(n.left) : n.value
+    n.left !== null ? leftmost(n.left) : n.value

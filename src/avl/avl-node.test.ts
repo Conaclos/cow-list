@@ -11,10 +11,10 @@ const V1: Version = 1
 test("leaf-node", (t) => {
     const leaf = AvlNode.leaf("c", V0)
 
-    t.deepEqual(leaf.left, undefined)
+    t.deepEqual(leaf.left, null)
     t.deepEqual(leaf.value, "c")
     t.deepEqual(leaf.version, V0)
-    t.deepEqual(leaf.right, undefined)
+    t.deepEqual(leaf.right, null)
     t.deepEqual(leaf.count, V1)
     t.deepEqual(leaf.rank, V1)
 })
@@ -184,7 +184,7 @@ test("delete-at-root", (t) => {
 
     const newRoot = root.delete(0, V0)
 
-    t.deepEqual(newRoot, undefined)
+    t.deepEqual(newRoot, null)
     t.deepEqual(root, toNode(["c"], V0))
 })
 
@@ -378,11 +378,8 @@ export type ArrayedNonEmptyNode<V> =
 export type ArrayedNode<V> = readonly [] | ArrayedNonEmptyNode<V>
 
 export function toNode<V>(a: ArrayedNonEmptyNode<V>, v: Version): AvlNode<V>
-export function toNode<V>(a: ArrayedNode<V>, v: Version): AvlNode<V> | undefined
-export function toNode<V>(
-    a: ArrayedNode<V>,
-    ver: Version
-): AvlNode<V> | undefined {
+export function toNode<V>(a: ArrayedNode<V>, v: Version): AvlNode<V> | null
+export function toNode<V>(a: ArrayedNode<V>, ver: Version): AvlNode<V> | null {
     switch (a.length) {
         case 1:
             return AvlNode.leaf(a[0], ver)
@@ -393,11 +390,11 @@ export function toNode<V>(
         case 4:
             return new AvlNode(toNode(a[0], ver), a[1], a[2], toNode(a[3], ver))
     }
-    return undefined
+    return null
 }
 
 export function toArrayed<V>(n: AvlNode<V>): ArrayedNode<V> {
-    const l = n.left !== undefined ? toArrayed(n.left) : ([] as const)
-    const r = n.right !== undefined ? toArrayed(n.right) : ([] as const)
+    const l = n.left !== null ? toArrayed(n.left) : ([] as const)
+    const r = n.right !== null ? toArrayed(n.right) : ([] as const)
     return [l, n.value, n.version, r]
 }

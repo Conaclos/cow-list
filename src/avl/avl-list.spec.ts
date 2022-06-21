@@ -7,8 +7,8 @@ import { asU32Between } from "../util/number.js"
 import { AvlList } from "./avl-list.js"
 import type { AvlNode } from "./avl-node.js"
 
-function isBalanced<V>(n: AvlNode<V> | undefined): boolean {
-    return n !== undefined
+function isBalanced<V>(n: AvlNode<V> | null): boolean {
+    return n !== null
         ? n.isBalanced() && isBalanced(n.left) && isBalanced(n.right)
         : true
 }

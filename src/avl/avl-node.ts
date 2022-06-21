@@ -12,8 +12,8 @@ import type { BinNode } from "./bin-node.js"
  * @param n
  * @return Rank of {@code n} or 0 if udefined.
  */
-export const rankOf = <V>(n: AvlNode<V> | undefined): u32 =>
-    n !== undefined ? n.rank : 0
+export const rankOf = <V>(n: AvlNode<V> | null): u32 =>
+    n !== null ? n.rank : 0
 
 /**
  * Node of an AVL tree.
@@ -27,7 +27,7 @@ export class AvlNode<V> implements BinNode<V> {
      * @retur a node without childs.
      */
     static leaf<V>(v: V, ver: Version): AvlNode<V> {
-        return new AvlNode(undefined, v, ver, undefined)
+        return new AvlNode(null, v, ver, null)
     }
 
     /**
@@ -43,9 +43,9 @@ export class AvlNode<V> implements BinNode<V> {
         start: u32,
         length: u32,
         ver: Version
-    ): AvlNode<V> | undefined {
+    ): AvlNode<V> | null {
         if (length === 0) {
-            return undefined
+            return null
         } else if (length === 1) {
             return AvlNode.leaf(vs[start], ver)
         } else {
@@ -62,9 +62,9 @@ export class AvlNode<V> implements BinNode<V> {
         start: u32,
         length: u32,
         ver: Version
-    ): AvlNode<V> | undefined {
+    ): AvlNode<V> | null {
         if (length === 0) {
-            return undefined
+            return null
         } else if (length === 1) {
             return AvlNode.leaf(vs.next().value, ver)
         } else {
@@ -85,7 +85,7 @@ export class AvlNode<V> implements BinNode<V> {
     /**
      * Left child.
      */
-    declare left: AvlNode<V> | undefined
+    declare left: AvlNode<V> | null
 
     /**
      * Node version.
@@ -101,7 +101,7 @@ export class AvlNode<V> implements BinNode<V> {
     /**
      * Right child.
      */
-    declare right: AvlNode<V> | undefined
+    declare right: AvlNode<V> | null
 
     /**
      * Number of nodes in the subtree rooted by this node.
@@ -127,10 +127,10 @@ export class AvlNode<V> implements BinNode<V> {
      * @param r
      */
     constructor(
-        l: AvlNode<V> | undefined,
+        l: AvlNode<V> | null,
         v: V,
         ver: Version,
-        r: AvlNode<V> | undefined
+        r: AvlNode<V> | null
     ) {
         this.left = l
         this.right = r
@@ -159,7 +159,7 @@ export class AvlNode<V> implements BinNode<V> {
      * @param l
      * @return Set left child with {@code l} and update metadata.
      */
-    protected setLeft(l: AvlNode<V> | undefined): void {
+    protected setLeft(l: AvlNode<V> | null): void {
         this.left = l
         this.update()
     }
@@ -177,7 +177,7 @@ export class AvlNode<V> implements BinNode<V> {
      * @param r
      * @return Set right child with {@code r} and update metadata.
      */
-    protected setRight(r: AvlNode<V> | undefined): void {
+    protected setRight(r: AvlNode<V> | null): void {
         this.right = r
         this.update()
     }
@@ -278,14 +278,14 @@ export class AvlNode<V> implements BinNode<V> {
         const self = this.owned(ver)
         if (index <= currIndex) {
             const left =
-                this.left !== undefined
+                this.left !== null
                     ? this.left.insert(index, v, ver)
                     : AvlNode.leaf(v, ver)
             self.setLeft(left)
         } else {
             const relIndex = index - currIndex - 1
             const right =
-                this.right !== undefined
+                this.right !== null
                     ? this.right.insert(relIndex, v, ver)
                     : AvlNode.leaf(v, ver)
             self.setRight(right)
@@ -302,10 +302,10 @@ export class AvlNode<V> implements BinNode<V> {
     replace(index: u32, v: V, ver: Version): AvlNode<V> {
         const currIndex = this.index()
         const self = this.owned(ver)
-        if (index < currIndex && this.left !== undefined) {
+        if (index < currIndex && this.left !== null) {
             const left = this.left.replace(index, v, ver)
             self.setLeft(left)
-        } else if (index > currIndex && this.right !== undefined) {
+        } else if (index > currIndex && this.right !== null) {
             const relIndex = index - currIndex - 1
             const right = this.right.replace(relIndex, v, ver)
             self.setRight(right)
@@ -320,14 +320,14 @@ export class AvlNode<V> implements BinNode<V> {
      * @param ver modification version
      * @return tree where the value at {@code index} is deleted.
      */
-    delete(index: u32, ver: Version): AvlNode<V> | undefined {
+    delete(index: u32, ver: Version): AvlNode<V> | null {
         const currIndex = this.index()
-        if (index < currIndex && this.left !== undefined) {
+        if (index < currIndex && this.left !== null) {
             const self = this.owned(ver)
             const left = this.left.delete(index, ver)
             self.setLeft(left)
             return self.balance()
-        } else if (index > currIndex && this.right !== undefined) {
+        } else if (index > currIndex && this.right !== null) {
             const self = this.owned(ver)
             const relIndex = index - currIndex - 1
             const right = this.right.delete(relIndex, ver)
@@ -342,10 +342,10 @@ export class AvlNode<V> implements BinNode<V> {
      * @param ver modification version
      * @return tree without this node.
      */
-    protected deleteCurrent(ver: Version): AvlNode<V> | undefined {
-        if (this.left === undefined) {
+    protected deleteCurrent(ver: Version): AvlNode<V> | null {
+        if (this.left === null) {
             return this.right
-        } else if (this.right === undefined) {
+        } else if (this.right === null) {
             return this.left
         } else {
             const self = this.owned(ver)
@@ -361,8 +361,8 @@ export class AvlNode<V> implements BinNode<V> {
      * @param ver modificatin version
      * @return tree without the node that stores the first value of the subtree.
      */
-    protected deleteLeftmost(ver: Version): AvlNode<V> | undefined {
-        if (this.left !== undefined) {
+    protected deleteLeftmost(ver: Version): AvlNode<V> | null {
+        if (this.left !== null) {
             const self = this.owned(ver)
             const left = this.left.deleteLeftmost(ver)
             self.setLeft(left)

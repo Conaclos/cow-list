@@ -72,14 +72,14 @@ test("tree-iterator-next", (t) => {
     const tree = AvlList.from(expected)
     const it = AvlList.from(expected).atFirst()
 
-    const treeValues = []
+    const treeValues: string[] = []
     for (const v of tree) {
         treeValues.push(v)
     }
 
     t.deepEqual(treeValues, expected)
 
-    const itValues = []
+    const itValues: string[] = []
     for (const v of it) {
         itValues.push(v)
     }

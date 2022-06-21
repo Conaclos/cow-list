@@ -21,7 +21,7 @@ const INITIAL_VERSION: Version = 0
  */
 export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
     static empty<V>(): AvlList<V> {
-        return new AvlList(undefined, INITIAL_VERSION)
+        return new AvlList(null, INITIAL_VERSION)
     }
 
     static from<V>(vs: ArrayLike<V>): AvlList<V> {
@@ -39,7 +39,7 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
     /**
      * Tree root.
      */
-    protected declare root: AvlNode<V> | undefined
+    protected declare root: AvlNode<V> | null
 
     /**
      * List version.
@@ -51,10 +51,10 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
 
     /**
      * @internal
-     * @param root root of the tree. Undefined if none.
+     * @param root root of the tree. Null if none.
      * @param ver version of the tree
      */
-    private constructor(root: AvlNode<V> | undefined, ver: Version) {
+    private constructor(root: AvlNode<V> | null, ver: Version) {
         this.root = root
         this.version = ver
     }
@@ -78,7 +78,7 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
 
     // Access
     get length(): u32 {
-        return this.root !== undefined ? this.root.count : 0
+        return this.root !== null ? this.root.count : 0
     }
 
     get summary(): u32 {
@@ -137,7 +137,7 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
 
     delete(index: u32): void {
         const root = this.root
-        if (root !== undefined) {
+        if (root !== null) {
             this.root = root.delete(index, this.version)
         }
     }
@@ -145,14 +145,14 @@ export class AvlList<V> implements CowList<V>, MutList<V>, Iterable<V> {
     insert(index: u32, v: V): void {
         const ver = this.version
         this.root =
-            this.root !== undefined
+            this.root !== null
                 ? this.root.insert(index, v, ver)
                 : AvlNode.leaf(v, ver)
     }
 
     replace(index: u32, v: V): void {
         const root = this.root
-        if (root !== undefined) {
+        if (root !== null) {
             this.root = root.replace(index, v, this.version)
         }
     }

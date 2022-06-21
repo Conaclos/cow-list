@@ -19,7 +19,7 @@ import type { BinNode } from "./bin-node.js"
  */
 const descendFirst = <V>(path: BinNode<V>[]): void => {
     let curr = lastOf(path).left
-    while (curr !== undefined) {
+    while (curr !== null) {
         path.push(curr)
         curr = curr.left
     }
@@ -61,8 +61,8 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
      * @param root tree root
      * @return iterator that starts the traversal at the first (leftmost) value.
      */
-    static atFirst<V>(root: BinNode<V> | undefined): BinTreeIterator<V> {
-        if (root !== undefined) {
+    static atFirst<V>(root: BinNode<V> | null): BinTreeIterator<V> {
+        if (root !== null) {
             const path = [root]
             descendFirst(path)
             return new BinTreeIterator(path, 0, 0)
@@ -78,7 +78,7 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
      * @return iterator that starts the traversal at a chosen position.
      */
     static atEqual<V>(
-        root: BinNode<V> | undefined,
+        root: BinNode<V> | null,
         f: Pathfinder<V>,
         leftSeekBias: boolean
     ): BinTreeIterator<V> {
@@ -87,7 +87,7 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
         let index = 0
         let summary = 0
         let curr = root
-        while (curr !== undefined) {
+        while (curr !== null) {
             path.push(curr)
             const prefixSummary = summary + summaryOf(curr.left)
             dir = f(curr.value, prefixSummary)
@@ -96,7 +96,7 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
             } else if (dir === Ordering.EQUAL) {
                 index = index + countOf(curr.left)
                 summary = prefixSummary
-                curr = undefined
+                curr = null
             } else {
                 index = index + countOf(curr.left) + 1
                 summary = prefixSummary + lengthOf(curr.value)
@@ -172,7 +172,7 @@ export class BinTreeIterator<V> implements ListIterator<V>, Iterator<V> {
             const curr = lastOf(path)
             this.index++
             this.summary = this.summary + lengthOf(curr.value)
-            if (curr.right !== undefined) {
+            if (curr.right !== null) {
                 path.push(curr.right)
                 descendFirst(path)
             } else {

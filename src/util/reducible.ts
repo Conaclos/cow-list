@@ -15,7 +15,7 @@ export interface Reducible<V> {
  * @return accumulated result.
  */
 export const reduceOf = <V, U>(
-    r: Reducible<V> | undefined,
+    r: Reducible<V> | null,
     f: (acc: U, v: V) => U,
     prefix: U
-): U => (r !== undefined ? r.reduce(f, prefix) : prefix)
+): U => (r !== null ? r.reduce(f, prefix) : prefix)

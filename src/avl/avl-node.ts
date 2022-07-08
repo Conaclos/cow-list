@@ -10,7 +10,7 @@ import type { BinNode } from "./bin-node.js"
 
 /**
  * @param n
- * @return Rank of {@code n} or 0 if udefined.
+ * @return Rank of {@code n} or 0 if undefined.
  */
 export const rankOf = <V>(n: AvlNode<V> | null): u32 =>
     n !== null ? n.rank : 0
@@ -24,7 +24,7 @@ export class AvlNode<V> implements BinNode<V> {
     /**
      * @param v stored value in the created node.
      * @param ver version of the created node.
-     * @retur a node without childs.
+     * @return a node without child.
      */
     static leaf<V>(v: V, ver: Version): AvlNode<V> {
         return new AvlNode(null, v, ver, null)
@@ -297,7 +297,7 @@ export class AvlNode<V> implements BinNode<V> {
      * @param index substitution index
      * @param v substitute
      * @param ver modification version
-     * @return tree where the value at {@code index} is repalced by {@code v}.
+     * @return tree where the value at {@code index} is replaced by {@code v}.
      */
     replace(index: u32, v: V, ver: Version): AvlNode<V> {
         const currIndex = this.index()
@@ -358,7 +358,7 @@ export class AvlNode<V> implements BinNode<V> {
     }
 
     /**
-     * @param ver modificatin version
+     * @param ver modification version
      * @return tree without the node that stores the first value of the subtree.
      */
     protected deleteLeftmost(ver: Version): AvlNode<V> | null {

@@ -2,14 +2,14 @@
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
 /**
- * Data strcuture that can be reduced.
+ * Data structure that can be reduced.
  */
 export interface Reducible<V> {
-    readonly reduce: <U>(f: (acc: U, v: V) => U, prfeix: U) => U
+    readonly reduce: <U>(f: (acc: U, v: V) => U, prefix: U) => U
 }
 
 /**
- * @param r data strcuture to reduce
+ * @param r data structure to reduce
  * @param f function that accumulated the traversed values
  * @param prefix initial accumulator
  * @return accumulated result.
